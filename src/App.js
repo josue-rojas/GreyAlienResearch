@@ -14,13 +14,7 @@ function SlideShowPanel(props){
 function SigninPanel(props){
   return(
     <div className='signin-panel'>
-      <TextInput
-        title='FULL NAME'
-        placeholder='Enter Your Full Name'/>
-      <CheckBox
-        onClick={props.onClick}
-        isChecked={props.isChecked}
-        text={<div style={{display: 'inline-block'}}>I agree <a href="">link</a></div>}/>
+      Panel
     </div>
   )
 }
@@ -28,16 +22,6 @@ function SigninPanel(props){
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      isToggle: false,
-      isChecked: false,
-    }
-    this.toggleCheck = this.toggleCheck.bind(this);
-  }
-
-  toggleCheck(){
-    console.log('clicked')
-    this.setState({isChecked: !this.state.isChecked});
   }
 
   render() {
@@ -45,8 +29,7 @@ class App extends Component {
       <div className="App">
         <TwoPanels
           firstPanel={<SlideShowPanel />}
-          secPanel={
-            <SigninPanel onClick={this.toggleCheck} isChecked={this.state.isChecked}/>}
+          secPanel={<SigninPanel/>}
         />
       </div>
     );
