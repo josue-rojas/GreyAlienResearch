@@ -3,6 +3,7 @@ import './Styles/App.css';
 import TwoPanels from './Components/TwoPanels';
 import Button, { ToggleButton } from './Components/Buttons';
 import { TextInput, CheckBox } from './Components/Inputs';
+import SigninPanel from './SiteComponents/SigninPanel';
 import Slides from './Components/Slides';
 // images
 import Img1 from './Images/alien-with-aqualung.svg';
@@ -26,13 +27,6 @@ function SlideShowPanel(props){
   )
 }
 
-function SigninPanel(props){
-  return(
-    <div className='signin-panel'>
-      Panel
-    </div>
-  )
-}
 
 class App extends Component {
   constructor(props){
