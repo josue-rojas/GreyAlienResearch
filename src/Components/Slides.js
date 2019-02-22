@@ -63,7 +63,7 @@ export default class Slides extends React.Component{
           <span>{this.props.texts[this.state.activeIndex]}</span>
         </div>
         <div className={`slideshow-wrapper ${animateClass}`}>
-          <img src={this.props.images[this.state.activeIndex]}/>
+          <img src={this.props.images[this.state.activeIndex]} alt={this.props.texts[this.state.activeIndex]}/>
         </div>
         <div className='dots-wrapper'>
           {this.createDots(this.props.images.length)}

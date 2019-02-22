@@ -1,0 +1,35 @@
+@import './Colors.sass'
+@import './mixins.sass'
+
+.slideshow-panel
+  background-image: linear-gradient($light_blue_top, $light_blue_bottom)
+  min-height: 100px
+  display: flex
+  flex-direction: column
+  .slides
+    margin: auto
+  .icon
+    width: 32px
+    height: 32px
+    display: none
+    img
+      max-width: 100%
+      max-height: 100%
+      height: auto
+      width: auto
+  +medium-devices
+    min-height: 100vh
+    flex-direction: column
+    .icon
+      display: block
+    .slides
+      display: flex
+      flex-direction: column
+      flex: 1
+      .text-wrapper
+        margin-top: auto
+      .slideshow-wrapper
+        margin-bottom: 30px
+      .dots-wrapper
+        margin-top: auto
+        margin-bottom: 30px
