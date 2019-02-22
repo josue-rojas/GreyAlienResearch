@@ -57,12 +57,12 @@ export default class SigninPanel extends React.Component {
             <CheckBox
               isChecked={this.state.checkbox}
               onClick={()=>this.setState({ checkbox: !this.state.checkbox })}
-              text={<div className='checkbox-text'><span>I agree all statements in <a href=''>terms and services</a></span></div>}/>
+              text={<div className='checkbox-text'><span>I agree all statements in <a href='/'>terms and services</a></span></div>}/>
             <Button
               text='Sign Up'
               onClick={this.submitForm}/>
             <div className='extra-link'>
-              <a href='#'>
+              <a href='/'>
                 I'm already a member
               </a>
             </div>

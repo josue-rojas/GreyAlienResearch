@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import './Styles/App.css';
 import TwoPanels from './Components/TwoPanels';
-import Button, { ToggleButton } from './Components/Buttons';
-import { TextInput, CheckBox } from './Components/Inputs';
 import SigninPanel from './SiteComponents/SigninPanel';
 import SlideShowPanel from './SiteComponents/SlideShowPanel';
 
 
-class App extends Component {
-  constructor(props){
-    super(props);
-  }
-
+export default class App extends Component {
   render() {
     return (
       <div className="App">
@@ -23,5 +17,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

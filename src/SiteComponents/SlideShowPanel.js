@@ -13,7 +13,7 @@ export default function SlideShowPanel(props){
   return(
     <div className='slideshow-panel'>
       <div className='icon'>
-        <img src={Icon}/>
+        <img src={Icon} alt='ufo-icon'/>
       </div>
       <Slides
         texts={[
