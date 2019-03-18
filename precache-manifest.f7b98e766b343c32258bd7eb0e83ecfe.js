@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/SignupSite/static/media/death-star.25f3a1b1.svg"
   },
   {
-    "revision": "f25c38000b8d7b71e1c4",
-    "url": "/SignupSite/static/css/main.cfd55efb.chunk.css"
+    "revision": "11c53b989b525a9faedb",
+    "url": "/SignupSite/static/css/main.81646c4c.chunk.css"
   },
   {
     "revision": "1875356badde6474c2e4",
@@ -20,8 +20,8 @@ self.__precacheManifest = [
     "url": "/SignupSite/static/media/alien-with-aqualung.29b5a0a9.svg"
   },
   {
-    "revision": "f25c38000b8d7b71e1c4",
-    "url": "/SignupSite/static/js/main.f25c3800.chunk.js"
+    "revision": "11c53b989b525a9faedb",
+    "url": "/SignupSite/static/js/main.11c53b98.chunk.js"
   },
   {
     "revision": "3ae23cc14ae61f8b5c83fc22c4a49802",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/SignupSite/static/media/big-ufo.034201a8.svg"
   },
   {
-    "revision": "db1806878bfb076c74b2b47a29633ebb",
+    "revision": "07dee4054c265951052ba9aca81989fc",
     "url": "/SignupSite/index.html"
   }
 ];
