@@ -27,7 +27,7 @@ export default class SigninPanel extends React.Component {
 
   render(){
     return(
-      <div className='signin-panel'>
+      <div className='signin-panel panel-content'>
         <div className='toggle-wrapper'>
           <ToggleButton
             onClick={()=>this.setState({isMember: !this.state.isMember})}
