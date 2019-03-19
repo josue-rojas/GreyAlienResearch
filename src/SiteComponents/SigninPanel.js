@@ -1,28 +1,35 @@
 import React from 'react';
-import Button, { ToggleButton } from '../Components/Buttons';
-import { CheckBox, TextInput } from '../Components/Inputs';
+import { ToggleButton } from '../Components/Buttons';
+import SignupForm from './SignupForm';
+import SigninForm from './SigninForm';
 import '../Styles/SigninPanel.css';
+import { Route, Link, withRouter } from "react-router-dom";
 
-export default class SigninPanel extends React.Component {
+
+class SigninPanel extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       isMember: false,
-      name: '',
-      password: '',
-      email: '',
-      checkbox: false,
     }
-    this.changeInput = this.changeInput.bind(this);
-    this.submitForm = this.submitForm.bind(this);
+    this.toggleForms = this.toggleForms.bind(this);
   }
 
-  changeInput(e){
-
+  // handle route for signin and signup to set correct state
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      let isMember = nextProps.location.pathname === '/signin';
+      this.setState({ isMember: isMember });
+    }
   }
 
-  submitForm(){
-    console.log('clicked')
+  // use withRouter to get history to change location on toggle
+  // note: i do not change state here since it will be change in componentWillReceiveProps
+  toggleForms(){
+    if(!this.state.isMember){
+      this.props.history.push('/signin');
+    }
+    else this.props.history.push('/signup');
   }
 
   render(){
@@ -30,45 +37,23 @@ export default class SigninPanel extends React.Component {
       <div className='signin-panel panel-content'>
         <div className='toggle-wrapper'>
           <ToggleButton
-            onClick={()=>this.setState({isMember: !this.state.isMember})}
+            onClick={this.toggleForms}
             isToggle={this.state.isMember}
             firstText='Sign In'
             secText='Sign Up'/>
         </div>
         <div className='form-wrapper'>
           <div className='title'>
-            <a href='#signin' className={this.state.isMember ? '' : 'notactive'}>Sign In</a>
+            <Link to='/signin' className={this.state.isMember ? '' : 'notactive'}>Sign In</Link>
              <span className='shadow-text'> &nbsp;Or&nbsp;&nbsp; </span>
-            <a href='#signup' className={this.state.isMember ? 'notactive' : ''}>Sign Up</a>
+            <Link to='/signup' className={this.state.isMember ? 'notactive' : ''}>Sign Up</Link>
           </div>
-          <form>
-            <TextInput
-              title='FULL NAME'
-              placeholder='Enter your full name'
-              onChange={()=>console.log('dhs')}/>
-            <TextInput
-              title='PASSWORD'
-              placeholder='Enter a password'
-              onChange={()=>console.log('dhs')}/>
-            <TextInput
-              title='E-MAIL'
-              placeholder='Enter your e-mail'
-              onChange={()=>console.log('dhs')}/>
-            <CheckBox
-              isChecked={this.state.checkbox}
-              onClick={()=>this.setState({ checkbox: !this.state.checkbox })}
-              text={<div className='checkbox-text'><span>I agree all statements in <a href='/'>terms and services</a></span></div>}/>
-            <Button
-              text='Sign Up'
-              onClick={this.submitForm}/>
-            <div className='extra-link'>
-              <a href='/'>
-                I'm already a member
-              </a>
-            </div>
-          </form>
+          <Route path="/signin" component={SigninForm} />
+          <Route path="/signup" component={SignupForm} />
         </div>
       </div>
     )
   }
 }
+
+export default withRouter(SigninPanel)
