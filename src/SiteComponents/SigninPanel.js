@@ -16,6 +16,8 @@ class SigninPanel extends React.Component {
   }
 
   // handle route for signin and signup to set correct state
+  // this component should only show up in '/signin' and '/signup'
+  // so no need to worry about other cases
   componentWillReceiveProps(nextProps) {
     if (nextProps.location !== this.props.location) {
       let isMember = nextProps.location.pathname === '/signin';
