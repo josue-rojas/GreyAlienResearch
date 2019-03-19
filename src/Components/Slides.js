@@ -28,6 +28,7 @@ export default class Slides extends React.Component{
 
   componentWillUnmount(){
     clearInterval(this.state.interval);
+    clearTimeout(this.state.timeoutAnimation);
   }
 
   switchImage(index){

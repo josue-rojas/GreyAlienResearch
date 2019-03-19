@@ -54,8 +54,8 @@ class SigninPanel extends React.Component {
              <span className='shadow-text'> &nbsp;Or&nbsp;&nbsp; </span>
             <Link to='/signup' className={this.state.isMember ? 'notactive' : ''}>Sign Up</Link>
           </div>
-          <Route path="/signin" component={SigninForm} />
-          <Route path="/signup" component={SignupForm} />
+          <Route path="/signin" component={()=>(<SigninForm firebase={this.props.firebase}/>)} />
+          <Route path="/signup" component={()=>(<SignupForm firebase={this.props.firebase}/>)} />
         </div>
       </div>
     )
