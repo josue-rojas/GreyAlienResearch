@@ -1,5 +1,5 @@
 import React from 'react';
-import { LinkButton } from '../Components/Buttons';
+import Button from '../Components/Buttons';
 import { CheckBox, TextInput } from '../Components/Inputs';
 import { Link } from "react-router-dom";
 
@@ -32,10 +32,12 @@ export default class SignupForm extends React.Component {
           placeholder='Enter your full name'
           onChange={()=>console.log('dhs')}/>
         <TextInput
+          type='password'
           title='PASSWORD'
           placeholder='Enter a password'
           onChange={()=>console.log('dhs')}/>
         <TextInput
+          type='email'
           title='E-MAIL'
           placeholder='Enter your e-mail'
           onChange={()=>console.log('dhs')}/>
@@ -43,9 +45,9 @@ export default class SignupForm extends React.Component {
           isChecked={this.state.checkbox}
           onClick={()=>this.setState({ checkbox: !this.state.checkbox })}
           text={<div className='checkbox-text'><span>I agree all statements in <a href='/'>terms and services</a></span></div>}/>
-        <LinkButton
+        <Button
           text='Sign Up'
-          link='/signup'/>
+          onClick={this.submitForm}/>
         <div className='extra-link'>
           <Link to='/signin'>
             I'm already a member

@@ -23,7 +23,7 @@ export class TextInput extends React.Component{
       <div className={`text-input input ${extraClass}`}>
         <label>{this.props.title}</label>
         <input
-          type='text'
+          type={this.props.type || 'text'}
           onFocus={()=>this.toggleFocus(true)}
           onBlur={()=>this.toggleFocus(false)}
           placeholder={this.props.placeholder}
