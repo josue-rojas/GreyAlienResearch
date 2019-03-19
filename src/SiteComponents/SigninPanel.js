@@ -15,6 +15,10 @@ class SigninPanel extends React.Component {
     this.toggleForms = this.toggleForms.bind(this);
   }
 
+  componentDidMount(){
+    this.setState({ isMember: this.props.location.pathname === '/signin' });
+  }
+
   // handle route for signin and signup to set correct state
   // this component should only show up in '/signin' and '/signup'
   // so no need to worry about other cases
