@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/SignupSite/static/media/big-ufo.034201a8.svg"
   },
   {
-    "revision": "db915815502e6a460278ccf20f7ad739",
+    "revision": "549c4bbff5bc4b13e39c946bb287bb69",
     "url": "/SignupSite/index.html"
   }
 ];
