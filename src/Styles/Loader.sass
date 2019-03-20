@@ -1,7 +1,9 @@
 @import './mixins.sass'
 
 $firstColor: rgba(55, 234, 206, 1)
+$inverseFirst: rgb(54, 74, 100)
 $secColor: rgba(255, 255, 255, .1)
+$inverseSec: rgba(255, 255, 255, .7)
 $loaderSize: 7px
 
 .loader-wrapper
@@ -26,6 +28,11 @@ $loaderSize: 7px
     border-left: $loaderSize solid $firstColor
     border-right: $loaderSize solid $firstColor
     animation: spin 1s linear infinite
+    &.inverse
+      border-left-color: $inverseFirst
+      border-right-color: $inverseFirst
+      border-bottom-color: $inverseSec
+      border-top-color: $inverseSec
 
 
 +keyframes(spin)

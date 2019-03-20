@@ -3,9 +3,19 @@ import { withRouter } from "react-router-dom";
 import TwoPanels from '../Components/TwoPanels';
 import SlideShowPanel from './SlideShowPanel';
 import SigninPanel from './SigninPanel';
+import Loader from '../Components/Loader';
 import firebase from '../firebase';
 
 // handles loading, main page, and slideshow/sign in page all withing the two-panel component
+function LoadingScreen(){
+  // umm. resusing the slidehow classes (too lazy to style again for this)
+  return(
+    <div className='slideshow-panel panel-content' style={{position: 'relative'}}>
+      <Loader isLoading={true} inverse={true}/>
+    </div>
+  )
+}
+
 class TwoPanelMain extends React.Component {
   constructor(props){
     super(props);
@@ -44,7 +54,7 @@ class TwoPanelMain extends React.Component {
   getFPanel(){
     if(this.state.initStart){
       // loading screeen
-      return (<div className='slideshow-panel panel-content'>LOADING...</div>)
+      return (<LoadingScreen/>)
     }
     else if(this.props.location.pathname === '/') {
       return (<div className='slideshow-panel panel-content'>Not loading...</div>)
