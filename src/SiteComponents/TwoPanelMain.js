@@ -27,10 +27,11 @@ class TwoPanelMain extends React.Component {
         isSignin: user !== null,
         initStart: false
       })
-      if(user === null){
+      console.log('pathname', thisWrapper.props.location.pathname);
+      if(user === null && thisWrapper.props.location.pathname === '/'){
         thisWrapper.props.history.push('/signin');
       }
-      else {
+      else if(user){
         thisWrapper.props.history.push('/');
       }
     })

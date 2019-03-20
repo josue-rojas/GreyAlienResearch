@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextInput } from '../Components/Inputs';
 import Button from '../Components/Buttons';
+import Loader from '../Components/Loader';
 import { Link } from "react-router-dom";
 import { hasInput, emailCheck } from '../Helpers/InputsCheck';
 import { checkAllInputs, handleOnChange } from '../Helpers/InputFunctions';
@@ -18,6 +19,7 @@ export default class SigninForm extends React.Component {
         val: '',
         hasError: false,
       },
+      isLoading: false,
     };
     this.checkInput = {
 			email: emailCheck,
@@ -33,11 +35,14 @@ export default class SigninForm extends React.Component {
       this.setState(valuesChange);
       return false;
     }
+    this.setState({ isLoading: true });
+    const thisWrapper = this;
     this.props.firebase.auth()
       .signInWithEmailAndPassword(this.state.email.val, this.state.password.val)
       .catch(function(error){
         var errorCode = error.code;
         var errorMessage = error.message;
+        thisWrapper.setState({ isLoading: false });
         console.log(errorCode, errorMessage);
       });
   }
@@ -51,30 +56,33 @@ export default class SigninForm extends React.Component {
 
   render(){
     return (
-      <form>
-        <TextInput
-          type='email'
-          title='E-MAIL'
-          placeholder='Enter your e-mail'
-          val={this.state.email.val}
-          hasError={this.state.email.hasError}
-          onChange={(e) => this.onInputChange(e, 'email')}/>
-        <TextInput
-          type='password'
-          title='PASSWORD'
-          placeholder='Enter your password'
-          val={this.state.password.val}
-          hasError={this.state.password.hasError}
-          onChange={(e) => this.onInputChange(e, 'password')}/>
-        <Button
-          text='Sign In'
-          onClick={this.signin}/>
-        <div className='extra-link'>
-          <Link to='/signup'>
-            Not a member?
-          </Link>
-        </div>
-      </form>
+      <div style={{position: 'relative'}}>
+        <Loader isLoading={this.state.isLoading}/>
+        <form className={this.state.isLoading ? 'inactive': ''}>
+          <TextInput
+            type='email'
+            title='E-MAIL'
+            placeholder='Enter your e-mail'
+            val={this.state.email.val}
+            hasError={this.state.email.hasError}
+            onChange={(e) => this.onInputChange(e, 'email')}/>
+          <TextInput
+            type='password'
+            title='PASSWORD'
+            placeholder='Enter your password'
+            val={this.state.password.val}
+            hasError={this.state.password.hasError}
+            onChange={(e) => this.onInputChange(e, 'password')}/>
+          <Button
+            text='Sign In'
+            onClick={this.signin}/>
+          <div className='extra-link'>
+            <Link to='/signup'>
+              Not a member?
+            </Link>
+          </div>
+        </form>
+      </div>
     );
   }
 }
