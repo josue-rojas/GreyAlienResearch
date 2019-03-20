@@ -42,10 +42,11 @@ export default class SignupForm extends React.Component {
 
   submitForm(){
     let valuesChange = checkAllInputs(this.checkInput, this.state);
-    if(valuesChange || this.state.checkbox ){
+    if(valuesChange){
       this.setState(valuesChange);
       return false;
     }
+    if(!this.state.checkbox) return false; // might need to add hasError
     this.props.firebase.auth()
       .createUserWithEmailAndPassword(this.state.email.val, this.state.password.val)
       .catch(function(error){

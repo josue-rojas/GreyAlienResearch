@@ -3,6 +3,7 @@ import './Styles/App.css';
 import TwoPanels from './Components/TwoPanels';
 import SigninPanel from './SiteComponents/SigninPanel';
 import SlideShowPanel from './SiteComponents/SlideShowPanel';
+import TwoPanelMain from './SiteComponents/TwoPanelMain';
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import firebase from './firebase';
 
@@ -37,19 +38,6 @@ export default class App extends Component {
     this.redirectComponent = this.redirectComponent.bind(this);
   }
 
-  componentDidMount(){
-    let thisWrapper = this;
-    firebase.auth().onAuthStateChanged(function(user){
-      thisWrapper.setState({
-        user: user,
-        isSignin: user != null,
-      })
-    })
-  }
-
-  componentWillUnmount(){
-    this.state.authObserver();
-  }
 
   getInitComponent(){
     return this.state.isSignin ? <Signin/>  : <Redirect
@@ -80,8 +68,7 @@ export default class App extends Component {
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
-          <Route path='/' exact component={this.getInitComponent}/>
-          <Route path="/(signup|signin)/"  exact component={this.getSigninComponent}/>
+          <Route path="/(|signup|signin)/"  exact component={TwoPanelMain}/>
           <Route component={this.redirectComponent} />
         </Switch>
       </Router>
