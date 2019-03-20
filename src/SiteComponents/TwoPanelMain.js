@@ -1,9 +1,8 @@
 import React from 'react';
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import TwoPanels from '../Components/TwoPanels';
 import SlideShowPanel from './SlideShowPanel';
 import SigninPanel from './SigninPanel';
-// import TwoPanelMain from './TwoPanelMain';
 import firebase from '../firebase';
 
 // handles loading, main page, and slideshow/sign in page all withing the two-panel component
@@ -28,7 +27,6 @@ class TwoPanelMain extends React.Component {
         isSignin: user !== null,
         initStart: false
       })
-      console.log('user')
       if(user === null){
         thisWrapper.props.history.push('/signin');
       }
