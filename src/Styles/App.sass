@@ -16,7 +16,7 @@
   box-sizing: border-box
   text-align: left
 
-
+$animationDelay: 750ms
 .two-panels
   // transitions for only-active panels
   // there is a bad transition in desktop where it remove the
@@ -26,7 +26,7 @@
     min-height: 0vh
     max-height: 100vh
     overflow-y: hidden
-    transition: 250ms min-height ease, 250ms width ease, 250ms max-height ease, 250ms max-width ease
+    transition: $animationDelay min-height ease, $animationDelay width ease, $animationDelay max-height ease, $animationDelay max-width ease
     +medium-devices
       min-height: 100vh
       max-width: 50%
