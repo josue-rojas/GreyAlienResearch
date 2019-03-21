@@ -58,7 +58,23 @@ export default class SignupForm extends React.Component {
         var errorMessage = error.message;
         console.log(errorCode, errorMessage);
         thisWrapper.setState({ isLoading: false });
-      });
+      })
+      .then((user_credentials)=>{
+        if(user_credentials){
+          user_credentials.user.updateProfile({
+            displayName: thisWrapper.state.name.val
+          });
+          // ummm a bad way to count users (not automatic if user is deleted...)
+          let countRef = thisWrapper.props.firebase.database().ref('count');
+          countRef.once('value')
+            .then((dataSnapshot)=>{
+              if(dataSnapshot.val()){
+                countRef.set(dataSnapshot.val()+1);
+              }
+              else countRef.set(1);
+            });
+        }
+      })
   }
 
   render(){
