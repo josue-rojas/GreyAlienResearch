@@ -1,4 +1,6 @@
 @import './colors.sass'
+@import './mixins.sass'
+
 
 .text-input
   text-align: left
@@ -21,7 +23,7 @@
     margin-top: 7px
     padding: 0px 3px 5px
     min-height: 30px
-    font-size: .9rem
+    font-size: 16px
     display: block
     outline: none
     -webkit-appearance: none
@@ -31,6 +33,8 @@
     border: 0px
     border-bottom: 1px solid $shadow_text
     color: white
+    +medium-devices
+      font-size: .9rem
     &::placeholder
       color: $shadow_text
   &.focus::after
