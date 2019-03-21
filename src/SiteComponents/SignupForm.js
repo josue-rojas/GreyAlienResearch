@@ -83,8 +83,8 @@ export default class SignupForm extends React.Component {
         <Loader isLoading={this.state.isLoading}/>
         <form className={this.state.isLoading ? 'inactive': ''}>
           <TextInput
-            title='FULL NAME'
-            placeholder='Enter your full name'
+            title='DISPLAY NAME'
+            placeholder='Enter your display name'
             val={this.state.name.val}
             hasError={this.state.name.hasError}
             onChange={(e) => this.onInputChange(e, 'name')}/>

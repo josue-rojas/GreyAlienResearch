@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Button(props){
   return(
     <div
-      className='rg button'
+      className={`rg button ${props.className}`}
       onClick={props.onClick}>
       {props.text}
     </div>
