@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/SignupSite/precache-manifest.390ce6ac7f0530e7a550fbeb50b6c812.js"
+  "/GreyAlienResearch/precache-manifest.813426160c2cc284ca6832b53a4dfb91.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/SignupSite/index.html", {
+workbox.routing.registerNavigationRoute("/GreyAlienResearch/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
