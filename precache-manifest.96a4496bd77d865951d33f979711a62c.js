@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/GreyAlienResearch/static/media/ufo-and-cow.45f2210e.svg"
   },
   {
-    "revision": "97955c5bfca9bd4f47d5",
-    "url": "/GreyAlienResearch/static/css/main.ed78a871.chunk.css"
+    "revision": "8f1f831315a3da9160da",
+    "url": "/GreyAlienResearch/static/css/main.b99548c9.chunk.css"
   },
   {
     "revision": "edf459fe0c66aae2519d",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/GreyAlienResearch/static/media/extraterrestial-head.3ae23cc1.svg"
   },
   {
-    "revision": "97955c5bfca9bd4f47d5",
+    "revision": "8f1f831315a3da9160da",
     "url": "/GreyAlienResearch/static/js/main.0037bf57.chunk.js"
   },
   {
@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/GreyAlienResearch/static/media/whatsapp.a80f9d54.svg"
   },
   {
-    "revision": "1c03eedfdd4ad03458bd5865b59b65cb",
+    "revision": "515c1a439d3b47bbad26e4e78e78da1c",
     "url": "/GreyAlienResearch/index.html"
   }
 ];

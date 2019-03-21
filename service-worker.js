@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/GreyAlienResearch/precache-manifest.cea76e0f2625712747e66c86bf4f8ab4.js"
+  "/GreyAlienResearch/precache-manifest.96a4496bd77d865951d33f979711a62c.js"
 );
 
 workbox.clientsClaim();
