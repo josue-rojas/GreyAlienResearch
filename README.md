@@ -1,5 +1,7 @@
-# SignupSite
-A simple site to showing the use of firebase authentication
+# GreyAlienResearch
+A simple site to showing the use of firebase authentication.
+
+Sign up site for Grey Alien Research.
 
 Design by https://dribbble.com/shots/2878911-Task-Manager-Concept-Sign-Up
 

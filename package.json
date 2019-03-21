@@ -1,8 +1,8 @@
 {
-  "name": "SignupSite",
+  "name": "GreyAlienResearch",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/SignupSite",
+  "homepage": "/GreyAlienResearch",
   "dependencies": {
     "firebase": "^5.9.0",
     "node-sass-chokidar": "^1.3.4",
