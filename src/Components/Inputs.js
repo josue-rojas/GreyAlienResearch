@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Styles/Inputs.css';
+import Tooltip from './Tooltip';
 
 export class TextInput extends React.Component{
   constructor(props){
@@ -21,6 +22,28 @@ export class TextInput extends React.Component{
     extraClass += this.props.hasError ? ' error' : '';
     return(
       <div className={`text-input input ${extraClass}`}>
+        <label>{this.props.title}</label>
+        <input
+          type={this.props.type || 'text'}
+          onFocus={()=>this.toggleFocus(true)}
+          onBlur={()=>this.toggleFocus(false)}
+          placeholder={this.props.placeholder}
+          value={this.props.value}
+          onChange={this.props.onChange}/>
+      </div>
+    )
+  }
+}
+
+
+// a textinput but with tooltip for messages
+export class TextInputWithTooltip extends TextInput{
+  render(){
+    let extraClass = this.state.isFocus ? 'focus' : '';
+    extraClass += this.props.hasError ? ' error' : '';
+    return(
+      <div className={`text-input input ${extraClass}`}>
+        <Tooltip message={this.props.tooltipMessage}/>
         <label>{this.props.title}</label>
         <input
           type={this.props.type || 'text'}
