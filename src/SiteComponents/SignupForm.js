@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from '../Components/Buttons';
-import { CheckBox, TextInput } from '../Components/Inputs';
+import { CheckBox, TextInputWithTooltip } from '../Components/Inputs';
 import Loader from '../Components/Loader';
 import { Link } from "react-router-dom";
 import { hasInput, emailCheck } from '../Helpers/InputsCheck';
 import { checkAllInputs, handleOnChange } from '../Helpers/InputFunctions';
+import { clearAllTimeOut }  from '../Helpers/timerFunctions';
 
 export default class SignupForm extends React.Component {
   constructor(props){
@@ -12,27 +13,41 @@ export default class SignupForm extends React.Component {
     this.state = {
       name: {
         val: '',
-        hasError: false
+        hasError: false,
+        tooltip: '',
       },
       password: {
         val: '',
-        hasError: false
+        hasError: false,
+        tooltip: '',
       },
       email: {
         val: '',
+        hasError: false,
+        tooltip: '',
+      },
+      checkbox: {
+        val: false,
         hasError: false
       },
-      checkbox: false,
       isLoading: false,
     };
     this.checkInput = {
       name: hasInput,
 			email: emailCheck,
       password: hasInput,
+      checkbox: () => this.state.checkbox.val
 		};
-    this.submitForm = this.submitForm.bind(this);
+    this.tooltipTimers = [];
     this.onInputChange = this.onInputChange.bind(this);
+    this.checkBoxChange = this.checkBoxChange.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+    this.handleFirebaseAuthError = this.handleFirebaseAuthError.bind(this);
+    this.clearAllToolTips = this.clearAllToolTips.bind(this);
+  }
 
+  componentWillUnmount(){
+    clearAllTimeOut(this.tooltipTimers);
   }
 
   onInputChange(e, inputKey){
@@ -42,22 +57,35 @@ export default class SignupForm extends React.Component {
     });
   }
 
+  // this one is a bit different than the input change so it has it's own function
+  checkBoxChange(){
+    const toggleBox = !this.state.checkbox.val;
+    this.setState({
+      checkbox: {
+        val: toggleBox,
+        hasError: !toggleBox
+      }
+    })
+  }
+
   submitForm(){
     let valuesChange = checkAllInputs(this.checkInput, this.state);
     if(valuesChange){
       this.setState(valuesChange);
       return false;
     }
-    if(!this.state.checkbox) return false; // might need to add hasError
     this.setState({ isLoading: true });
     const thisWrapper = this;
     this.props.firebase.auth()
       .createUserWithEmailAndPassword(this.state.email.val, this.state.password.val)
       .catch(function(error){
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        thisWrapper.setState({ isLoading: false });
+        thisWrapper.setState({ isLoading: false }, ()=>{
+          let newState = thisWrapper.handleFirebaseAuthError(error.code, error.message, thisWrapper.state);
+          thisWrapper.setState(newState, ()=>{
+            thisWrapper.clearAllToolTips(); //ummm. this makes it more confusing
+                        // but this is setting up a timer to clear all tooltips so they won't show if there are no error
+          });
+        });
       })
       .then((user_credentials)=>{
         if(user_credentials){
@@ -77,25 +105,55 @@ export default class SignupForm extends React.Component {
       })
   }
 
+  // adds tooltip message to error in their right place
+  // returns state with changes
+  handleFirebaseAuthError(errorCode, errorMessage, state){
+    let copyState = {...state};
+    if(['auth/email-already-in-use', 'auth/invalid-email'].includes(errorCode)){
+      copyState.email.tooltip = errorMessage;
+    }
+    else if(errorCode === 'auth/weak-password'){
+      copyState.password.tooltip = errorMessage;
+    }
+    return copyState;
+  }
+
+  clearAllToolTips(){
+    // clear tooltips so they won't appear again if there are no errors
+    let copyState = { ...this.state };
+    let tooltips = ['password', 'name', 'email'];
+    for(let i in tooltips){
+      copyState[tooltips[i]].tooltip = '';
+    }
+    this.tooltipTimers.push(
+      setTimeout(()=>{
+        this.setState({ copyState });
+      }, 2300)
+    );
+  }
+
   render(){
     return(
       <div style={{position: 'relative'}}>
         <Loader isLoading={this.state.isLoading}/>
         <form className={this.state.isLoading ? 'inactive': ''}>
-          <TextInput
+          <TextInputWithTooltip
+            tooltipMessage={this.state.name.tooltip}
             title='DISPLAY NAME'
             placeholder='Enter your display name'
             val={this.state.name.val}
             hasError={this.state.name.hasError}
             onChange={(e) => this.onInputChange(e, 'name')}/>
-          <TextInput
+          <TextInputWithTooltip
+            tooltipMessage={this.state.password.tooltip}
             type='password'
             title='PASSWORD'
             placeholder='Enter a password'
             val={this.state.password.val}
             hasError={this.state.password.hasError}
             onChange={(e) => this.onInputChange(e, 'password')}/>
-          <TextInput
+          <TextInputWithTooltip
+            tooltipMessage={this.state.email.tooltip}
             type='email'
             title='E-MAIL'
             placeholder='Enter your e-mail'
@@ -103,8 +161,9 @@ export default class SignupForm extends React.Component {
             hasError={this.state.email.hasError}
             onChange={(e) => this.onInputChange(e, 'email')}/>
           <CheckBox
-            isChecked={this.state.checkbox}
-            onClick={()=>this.setState({ checkbox: !this.state.checkbox })}
+            hasError={this.state.checkbox.hasError}
+            isChecked={this.state.checkbox.val}
+            onClick={this.checkBoxChange}
             text={<div className='checkbox-text'><span>I agree all statements in <a href='/'>terms and services</a></span></div>}/>
           <Button
             text='Sign Up'

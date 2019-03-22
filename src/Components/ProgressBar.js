@@ -11,7 +11,6 @@ export default class ProgressBar extends React.Component{
   }
 
   componentDidMount(){
-    console.log('progress, in bar', this.props.progress);
     let timer = setTimeout(
       ()=> this.setState({ progress: this.props.progress }),
       1);

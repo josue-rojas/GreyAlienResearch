@@ -10,7 +10,7 @@ const goals = [10, 100, 500, 10000];
 
 function ShareBar(props){
   const thisUrl = encodeURI(window.location.href);
-  const message = encodeURI(`Join in helping Grey Alien Research reach their goal for W0rld Domination!\n Sign up now at ${thisUrl}`);
+  const message = encodeURI(`Join in helping Grey Alien Research reach their goal for W0rld Domination!\n\nSign up now at ${thisUrl}`);
   const whatsapp_share = `https://wa.me/?text=${message}`;
   const facebook_share = `https://www.facebook.com/sharer/sharer.php?u=${thisUrl}`;
   const twitter_share = `https://twitter.com/home?status=${message}`;
@@ -86,7 +86,7 @@ class UserPanel extends React.Component {
       <div className='user-panel panel-content'>
         <div className='content-wrapper'>
           <div className='avatar-wrapper'>
-            <img src={`http://identicon-1132.appspot.com/${encodeURI(this.props.user.displayName|| '')}`} alt='avatar'/>
+            <img src={`http://identicon-1132.appspot.com/${encodeURI((this.props.user.displayName || '').replace(/\s+/g, ''))}`} alt='avatar'/>
           </div>
           <div className='welcome-message'>
             <span className='title'>Welcome {this.props.user.displayName || ''}!</span>
