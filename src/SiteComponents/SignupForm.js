@@ -22,17 +22,21 @@ export default class SignupForm extends React.Component {
         val: '',
         hasError: false
       },
-      checkbox: false,
+      checkbox: {
+        val: false,
+        hasError: false
+      },
       isLoading: false,
     };
     this.checkInput = {
       name: hasInput,
 			email: emailCheck,
       password: hasInput,
+      checkbox: () => this.state.checkbox.val
 		};
-    this.submitForm = this.submitForm.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
-
+    this.checkBoxChange = this.checkBoxChange.bind(this);
+    this.submitForm = this.submitForm.bind(this);
   }
 
   onInputChange(e, inputKey){
@@ -40,6 +44,17 @@ export default class SignupForm extends React.Component {
     this.setState({
       [inputKey]: inputState
     });
+  }
+
+  // this one is a bit different than the input change so it has it's own function
+  checkBoxChange(){
+    const toggleBox = !this.state.checkbox.val;
+    this.setState({
+      checkbox: {
+        val: toggleBox,
+        hasError: !toggleBox
+      }
+    })
   }
 
   submitForm(){
@@ -103,8 +118,9 @@ export default class SignupForm extends React.Component {
             hasError={this.state.email.hasError}
             onChange={(e) => this.onInputChange(e, 'email')}/>
           <CheckBox
-            isChecked={this.state.checkbox}
-            onClick={()=>this.setState({ checkbox: !this.state.checkbox })}
+            hasError={this.state.checkbox.hasError}
+            isChecked={this.state.checkbox.val}
+            onClick={this.checkBoxChange}
             text={<div className='checkbox-text'><span>I agree all statements in <a href='/'>terms and services</a></span></div>}/>
           <Button
             text='Sign Up'

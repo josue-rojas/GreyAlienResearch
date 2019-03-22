@@ -39,10 +39,10 @@ export class TextInput extends React.Component{
 export function CheckBox(props){
   const checkedClass = props.isChecked ? 'checked' : '';
   return(
-    <div className='checkbox'>
+    <div className={`checkbox ${props.className || ''}`}>
       <div
         onClick={props.onClick}
-        className={`check ${checkedClass}`}></div>
+        className={`check ${checkedClass} ${props.hasError ? 'error' : ''}`}></div>
       {props.text}
     </div>
   )

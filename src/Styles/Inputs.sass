@@ -1,7 +1,6 @@
 @import './colors.sass'
 @import './mixins.sass'
 
-
 .text-input
   text-align: left
   font-size: .9rem
@@ -42,25 +41,28 @@
     margin: 0%
   &.error
     input::placeholder
-      color: rgb(251, 85, 99)
+      color: $error_color
     &::after
       width: 100%
       margin: 0%
-      background-color: rgb(251, 85, 99)
+      background-color: $error_color
 
 .checkbox
   .check
-    width: 18px
-    height: 18px
+    width: 20px
+    height: 20px
     background-color: $dark_blue_shade
     display: inline-block
     border-radius: 3px
     cursor: pointer
     padding: 2px
     position: relative
+    border: 1px solid $dark_blue_shade
     transition: background-color 200ms
     user-select: none
     margin-right: 5px
+    &.error
+      border-color: $error_color
     &::after
       content: ""
       display: block
