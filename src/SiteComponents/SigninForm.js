@@ -51,7 +51,6 @@ export default class SigninForm extends React.Component {
       .signInWithEmailAndPassword(this.state.email.val, this.state.password.val)
       .catch(function(error){
         thisWrapper.setState({ isLoading: false }, ()=>{
-          console.log('weeoe', error.code)
           let newState = thisWrapper.handleFirebaseAuthError(error.code, error.message, thisWrapper.state);
           thisWrapper.setState(newState, ()=>{
             thisWrapper.clearAllToolTips(2300); //ummm. this makes it more confusing
