@@ -109,12 +109,10 @@ export default class SignupForm extends React.Component {
   // returns state with changes
   handleFirebaseAuthError(errorCode, errorMessage, state){
     let copyState = {...state};
-    if(['auth/email-already-in-use', 'auth/invalid-email'].includes(errorCode)){
-      copyState.email.tooltip = errorMessage;
-    }
-    else if(errorCode === 'auth/weak-password'){
+    if(errorCode === 'auth/weak-password'){
       copyState.password.tooltip = errorMessage;
     }
+    else copyState.email.tooltip = errorMessage;
     return copyState;
   }
 

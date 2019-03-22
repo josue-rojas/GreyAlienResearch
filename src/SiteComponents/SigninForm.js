@@ -43,15 +43,18 @@ export default class SigninForm extends React.Component {
       this.setState(valuesChange);
       return false;
     }
+    // clear any tooltips before continuing
+    this.clearAllToolTips(0);
     this.setState({ isLoading: true });
     const thisWrapper = this;
     this.props.firebase.auth()
       .signInWithEmailAndPassword(this.state.email.val, this.state.password.val)
       .catch(function(error){
         thisWrapper.setState({ isLoading: false }, ()=>{
+          console.log('weeoe', error.code)
           let newState = thisWrapper.handleFirebaseAuthError(error.code, error.message, thisWrapper.state);
           thisWrapper.setState(newState, ()=>{
-            thisWrapper.clearAllToolTips(); //ummm. this makes it more confusing
+            thisWrapper.clearAllToolTips(2300); //ummm. this makes it more confusing
                         // but this is setting up a timer to clear all tooltips so they won't show if there are no error
           });
         });
@@ -62,12 +65,10 @@ export default class SigninForm extends React.Component {
   // returns state with changes
   handleFirebaseAuthError(errorCode, errorMessage, state){
     let copyState = {...state};
-    if(['auth/invalid-email', 'auth/user-disabled', 'auth/user-not-found'].includes(errorCode)){
-      copyState.email.tooltip = errorMessage;
-    }
-    else if(errorCode === 'auth/wrong-password'){
+    if(errorCode === 'auth/wrong-password'){
       copyState.password.tooltip = errorMessage;
     }
+    else copyState.email.tooltip = errorMessage;
     return copyState;
   }
 
@@ -78,7 +79,7 @@ export default class SigninForm extends React.Component {
     });
   }
 
-  clearAllToolTips(){
+  clearAllToolTips(timetoclear){
     // clear tooltips so they won't appear again if there are no errors
     let copyState = { ...this.state };
     let tooltips = ['password', 'email'];
@@ -88,7 +89,7 @@ export default class SigninForm extends React.Component {
     this.tooltipTimers.push(
       setTimeout(()=>{
         this.setState({ copyState });
-      }, 2300)
+      }, timetoclear)
     );
   }
 
