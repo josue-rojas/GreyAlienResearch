@@ -21,7 +21,6 @@ export default class Tooltip extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('nextProps', nextProps.message);
     if(nextProps.message !== this.state.message){
       this.setState({
         isExpire: false,

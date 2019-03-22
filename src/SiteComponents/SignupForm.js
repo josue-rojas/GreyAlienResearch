@@ -74,7 +74,6 @@ export default class SignupForm extends React.Component {
       this.setState(valuesChange);
       return false;
     }
-    if(!this.state.checkbox) return false; // might need to add hasError
     this.setState({ isLoading: true });
     const thisWrapper = this;
     this.props.firebase.auth()
