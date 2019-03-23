@@ -13,8 +13,12 @@
 
 .rg
   background-image: $leftGradient
+  background-size: 100% 100%
   min-width: 100px
   box-shadow: 0px 3px 10px rgba(0, 0, 0, .4)
+  transition: 200ms background-size
+  &:hover
+    background-size: 400% 400%
   &.inverse
     background-image: $rightGradient
 
