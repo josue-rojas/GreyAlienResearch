@@ -6,15 +6,13 @@ import Img2 from '../Images/death-star.svg';
 import Img3 from '../Images/extraterrestial-head.svg';
 import Img4 from '../Images/ufo-and-cow.svg';
 import Img5 from '../Images/solar-system.svg';
-import Icon from '../Images/big-ufo.svg';
+import Logo from './Logo';
 import '../Styles/SlideShowPanel.css';
 
 export default function SlideShowPanel(props){
   return(
     <div className='slideshow-panel panel-content'>
-      <div className='icon'>
-        <img src={Icon} alt='ufo-icon'/>
-      </div>
+      <Logo/>
       <Slides
         texts={[
           'Grey Alien Reasearch .co is a great way to experience a new Life. Sign up now!',

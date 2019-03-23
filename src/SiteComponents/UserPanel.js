@@ -4,6 +4,7 @@ import ProgressBar from '../Components/ProgressBar';
 import { SocialIconLink } from '../Components/SocialIcon';
 import { withRouter } from "react-router-dom";
 import '../Styles/UserPanel.css';
+import Logo from './Logo';
 
 // goal of users to reach
 const goals = [10, 100, 500, 10000];
@@ -84,13 +85,14 @@ class UserPanel extends React.Component {
     let { progress, goal } = this.getPercent(this.state.totalUsers);
     return(
       <div className='user-panel panel-content'>
+        <Logo/>
         <div className='content-wrapper'>
           <div className='avatar-wrapper'>
             <img src={`http://identicon-1132.appspot.com/${encodeURI((this.props.user.displayName || '').replace(/\s+/g, ''))}`} alt='avatar'/>
           </div>
           <div className='welcome-message'>
             <span className='title'>Welcome {this.props.user.displayName || ''}!</span>
-            <p>We at Grey <span className='bold'>Alien Research .co</span> apprecieate your cooperation.</p>
+            <p>We at <a rel='noopener noreferrer' target='_blank' href='https://en.wikipedia.org/wiki/Grey_alien' className='bold'>Grey Alien Research .co</a> apprecieate your cooperation.</p>
           </div>
           <div className='progress-message'>
             <ProgressBar progress={progress} className='progress'/>
